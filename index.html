@@ -31,3 +31,58 @@
     }
   </style>
 </head>
+<body>
+
+  <h1>🧩 Checkbox Quest</h1>
+  <p>Complete your journey, one checkbox at a time.</p>
+  <div id="checkboxContainer"></div>
+  <div id="message"></div>
+
+  <script>
+    const container = document.getElementById('checkboxContainer');
+    const message = document.getElementById('message');
+    let count = 0;
+
+    function createCheckbox(index) {
+      const label = document.createElement('label');
+      label.className = 'checkbox-item';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.disabled = index !== 0;
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          checkbox.disabled = true;
+          count++;
+
+          // Unlock the next checkbox
+          createCheckbox(count);
+
+          // Every 10 checkboxes, show a motivational message
+          if (count % 10 === 0) {
+            const messages = [
+              "You're doing amazing! 🚀",
+              "10 more checked! Keep going! 🌟",
+              "Checkbox champion! 🏆",
+              "This quest is yours to finish. 🔥",
+              "Zen mode: activated. 🧘‍♂️"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            message.textContent = randomMessage;
+          } else {
+            message.textContent = '';
+          }
+        }
+      });
+
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(` Step ${index + 1}`));
+      container.appendChild(label);
+    }
+
+    // Start the journey
+    createCheckbox(0);
+  </script>
+
+</body>
+</html>
