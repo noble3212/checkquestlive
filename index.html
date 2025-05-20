@@ -49,7 +49,7 @@
 
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.disabled = index !== 0;
+      checkbox.disabled = index !== count;
       checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           checkbox.disabled = true;
